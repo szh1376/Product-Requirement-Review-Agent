@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title> AI 产品需求评审</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <main class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <span>SP</span>
+        <div>
+          <strong>SpecPilot</strong>
+          <small>AI 需求评审</small>
+        </div>
+      </div>
+      <button id="new-review" class="primary full">+ 新建评审</button>
+      <div class="side-heading">历史评审</div>
+      <div id="history" class="history">
+        <p class="muted">正在加载历史记录…</p>
+      </div>
+    </aside>
+
+    <section class="content">
+      <header>
+        <p class="eyebrow">PRODUCT REQUIREMENT REVIEW</p>
+        <h1>让每份 PRD 先经过一轮专业审查。</h1>
+        <p>产品、技术和测试三个智能体并行识别需求风险，并给出可执行的改进建议。</p>
+      </header>
+
+      <section id="editor" class="panel">
+        <div class="panel-heading">
+          <h2>提交需求文档</h2>
+          <span>支持文本、Markdown、PDF、DOCX</span>
+        </div>
+        <div class="mode-switch">
+          <button class="mode active" data-mode="text">粘贴文本</button>
+          <button class="mode" data-mode="file">上传文件</button>
+        </div>
+
+        <div id="text-form">
+          <label>
+            需求名称
+            <input id="title" maxlength="120" value="账号注销功能" />
+          </label>
+          <label>
+            PRD 内容
+            <textarea id="document" minlength="30">
+# 账号注销功能
+用户可在“设置—账号与安全”中注销账号。点击“注销账号”后，系统立即删除用户信息，并跳转至登录页。用户注销后不可恢复账号。
+验收标准：用户点击注销后可成功退出登录。</textarea>
+          </label>
+          <button id="submit-text" class="primary">开始 AI 评审</button>
+        </div>
+
+        <div id="file-form" class="hidden">
+          <label>
+            需求名称（可选）
+            <input id="file-title" maxlength="120" placeholder="默认使用文件名" />
+          </label>
+          <label class="drop-zone">
+            选择 PRD 文件
+            <input id="file" type="file" accept=".txt,.md,.pdf,.docx" />
+            <span id="file-name">支持 .txt、.md、.pdf、.docx，最大 8MB</span>
+          </label>
+          <button id="submit-file" class="primary">上传并开始评审</button>
+        </div>
+      </section>
+
+      <section id="result" class="hidden"></section>
+    </section>
+  </main>
+
+  <template id="finding-template">
+    <article class="finding">
+      <div class="finding-top">
+        <span class="badge"></span>
+        <span class="reviewer"></span>
+      </div>
+      <h3></h3>
+      <dl>
+        <div>
+          <dt>原文依据</dt>
+          <dd class="evidence"></dd>
+        </div>
+        <div>
+          <dt>问题原因</dt>
+          <dd class="reason"></dd>
+        </div>
+        <div>
+          <dt>修改建议</dt>
+          <dd class="recommendation"></dd>
+        </div>
+      </dl>
+    </article>
+  </template>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
